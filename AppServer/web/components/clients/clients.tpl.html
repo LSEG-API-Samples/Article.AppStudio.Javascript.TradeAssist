@@ -1,0 +1,41 @@
+<div ng-controller="ClientsCtrl">
+    <!--i ng-class="{'fa fa-chevron-right': isCollapsed(), 'fa fa-chevron-down':isNotCollapsed()}"></i><div id="clients_header" 
+    ng-click="Collapsed=!Collapsed">Counterparties</div-->
+    <label style="margin-left:3px">Company or person:</label><input type="search" placeholder="Search" class="search" ng-model="clientFilter" id="clientfilter"/>
+    <div collapse="clientService.Collapsed">
+		<table id="clients" class="collapse-content basic-table links-alt-color">
+			<thead>
+			  <tr><th style="width:130px; position:relative; color: #ff9933;" ng-click="sort('name')">Counterparty
+			  <span ng-if="isSortUp('name')" class="sorting_symbol">▼</span>
+			  <span ng-if="!isSortUp('name')" class="sorting_symbol">▲</span>
+			  </th><th style="width:200px">RIC</th><th style="width:30px">I buy</th><th style="width:30px">I sell</th><th style="width:150px">Person</th><th style="width:150px">Phone number</th><th style="width:150px">E-mail</th><th style="width:50px">Actions</th></tr>
+			</thead>
+			<tfoot><tr><td colspan='8'>
+			<button ng-click="addClient()">Add contact</button>
+			<tbody>
+			  <tr ng-repeat="client in clientService.clients | filter: searchClient | orderBy:sortField:reverse track by client.id">
+				<td><span editable-text="client.name" e-name="name" e-form="rowform" e-required>
+				<!--a ng-click="clientService.setPoints(client)">{{client.name}}</a-->
+				{{client.name}}
+				</span></td>
+				<td><span editable-text="client.ric" e-name="ric" e-form="rowform" e-required>{{ client.ric || '' }}</span></td>
+				<td><span editable-number="client.points.ask" e-max="0" e-form="rowform" e-select-on-click e-required e-class="number" e-keep-ask-negative>{{ client.points.ask || 0 }}</span></td>
+				<td><span editable-number="client.points.bid" e-min="0" e-form="rowform" e-select-on-click e-required e-class="number">{{ client.points.bid || 0 }}</span></td>
+				<td><span editable-text="client.person" e-name="person" e-form="rowform" e-required>{{ client.person || '' }}</span></td>
+				<td><span editable-text="client.phones" e-name="phones" e-form="rowform" e-required>{{ client.phones || '' }}</span></td>
+				<td><span editable-text="client.email" e-name="email" e-form="rowform" e-required>{{ client.email || '' }}</span></td>
+				<td>
+					<form editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == client" onaftersave="saveClient($data, client.id)">
+					  <button type="submit" ng-disabled="rowform.$waiting" class="icon"><span class="icon-tick"></span></button>
+					  <button type="button" ng-disabled="rowform.$waiting" ng-click="cancelEdit(client, rowform)" class="icon"><span class="icon-cross-mini-2"></span></button>
+					</form>
+					<div class="buttons" ng-show="!rowform.$visible">
+					  <button class="icon" ng-click="rowform.$show()"><span class="icon-edit"></span></button>
+					  <button class="icon" ng-click="removeClient(client)"><span class="icon-trash"></span></button>
+					</div>  
+				</td>
+			  </tr>
+			</tbody>
+		</table>
+    </div>
+</div>

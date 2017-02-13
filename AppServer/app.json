@@ -1,0 +1,12 @@
+{
+  "name": "RUBQuoteAssist",
+  "description": "RUB Quote Assist HTML5 Application for Thomson Reuteters Eikon 4",
+  "version": "0.1.1",
+  "type": "WebApp",
+  "defaultPlatform": "NodeJS",
+  "displayName": "RUB Quote Assist",
+  "defaultPage": "index.html",
+  "configurations": {
+  "globalText": "RUB Quote Assist"
+  }
+}

@@ -1,0 +1,19 @@
+<div ng-controller="CalculatorCtrl" >
+  <div id="query">
+    <label style="margin-left:3px">Counterparty:</label>
+    <input ng-focus="updateclients()" type="search" class="search" placeholder="Search" typeahead-on-select="setPoints($item)" ng-model="selectedClient.name" typeahead="c.name+' / '+c.ric for c in searchClient($viewValue)" class="form-control"/>
+    <button class="icon" ng-click="opencounterparties()" tooltip='Edit counterparties' tooltip-trigger="mouseenter" tooltip-placement="bottom">
+      <span class="icon-list"></span>
+    </button>
+    <label ng-bind-html="'Volume '+ quote.base_currency + ':'| rawHtml "></label>
+    <input type="text" class="volume" required ng-model="quote.volume"  separated-input select-on-click />
+  </div>
+  <div id="calculator">
+    <div class="header">
+      <span id="ric_descr">{{quote.name}}</span>
+        <button class="icon" style="float:right" ng-click="openchart()" tooltip='Show chart' tooltip-trigger="mouseenter" tooltip-placement="left"><span class="icon-line-chart"></span>
+        </button>
+    </div>
+    <aoz-scoreboard quote="quote" currency="instrument.secondary"></aoz-scoreboard>
+  </div>
+</div>

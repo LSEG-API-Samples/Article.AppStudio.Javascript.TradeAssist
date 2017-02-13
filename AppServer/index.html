@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="en" ng-app="TradeAssistApp" class="no-js" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>RUB Quote Assist</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--(if target dist)>
+  <link href="web/css/appstyles.css" rel="stylesheet"/>
+  <script src="trapp.js"></script>        
+  <!(endif)-->
+  <!--(if target dev)><!-->
+  <link rel="stylesheet" href="web/css/normalize.css">
+  <link rel="stylesheet" href="web/css/main.css">
+  <link rel="stylesheet" href="web/libs/angular-xeditable/dist/css/xeditable.css">
+  <link rel="stylesheet" href="web/webui/css/EikonWebUI.css">
+  <link rel="stylesheet" href="web/css/app.css">
+  <link rel="stylesheet" href="web/css/tra.css">
+  <link rel="stylesheet" href="web/css/tr.autosuggest.css">
+
+  <script src="web/libs/jet-1.8.0/JET.js"></script>
+  <script src="web/libs/jet-1.8.0/plugins/Quotes.js"></script>
+  <script src="web/libs/jet-1.8.0/plugins/Settings.js"></script>
+  
+  <!--<!(endif)-->
+  <script type="text/javascript">
+    var isCalculatorWindow = function() {
+      var getURLParameter = function(name) {
+        var rx = new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)');
+        return decodeURIComponent((rx.exec(window.top.location.search) || [,""])[1].replace(/\+/g, '%20')) || null;
+      };
+
+      return getURLParameter('counterparties') != '1';
+    };
+
+    var isCalculator = isCalculatorWindow();
+
+    function onloadHandler() {
+      //Handling JET OnLoad event which will be fired after JET.init() is done
+      var controllerScope = angular.element(document.getElementById('body')).scope();
+      controllerScope.isCalculator = isCalculator;
+      controllerScope.$apply();
+
+      function updateCounterparties() {
+        controllerScope.updateclients();
+        controllerScope.$apply();
+      }
+
+      var getTitle = function () {
+        return isCalculator ? "Quote Assist" : "Quote Assist: Counterparties";
+      };
+
+      var getToolbarBar = function () {
+        if (isCalculator)
+          return {
+            commandBars: [{ items: [{ item: "Search" }] }]
+          };
+      };
+
+      JET.onLoad(function() {
+        // choose application mode: if it is a quote window or a contact list editor
+        if(isCalculator) JET.resizeTo(420, 423);
+
+        // set up a communication channel with other app instances
+        JET.subscribe("/counterparties", updateCounterparties, null);
+
+        // read list of counterparties
+        updateCounterparties();
+      });
+   
+      //Initialize JET to get it ready for eikon integration
+      JET.init({
+        ID:"TradeAssistID",  //Unique ID of your application, can be any string
+        Title: getTitle(),
+        Summary:"Simple fx trade desk helper", //Any string to describe your app
+        NavigationSupport: JET.NavigationSupport.CanReceiveContext, // navigationSupportFlags
+        Toolbar: getToolbarBar()
+      });
+    }
+  </script>
+</head>
+
+<body id='body' class="content-block" onload="onloadHandler()" ng-controller="AppCtrl">
+  <div ng-include="getInclude()"></div>
+  <!--(if target dev)><!-->
+  <script src="web/libs/jquery/jquery-2.1.4.min.js"></script>
+  <script src="web/libs/select2/select2.js"></script>
+  <script src="web/libs/angular/angular.min.js"></script>
+  <script src="web/libs/angular/i18n/angular-locale_ru-ru.js"></script>
+  <script src="web/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="web/libs/angular-route/angular-route.js"></script>
+  <script src="web/libs/angular-xeditable/dist/js/xeditable.js"></script>
+  <script src="web/libs/js/tr.autosuggest.min.js"></script>
+  <script src="trapp.js"></script>
+  <script src="web/components/calculator/calculator.js"></script>
+  <script src="web/components/quotes/quotes.js"></script>
+  <script src="web/components/clients/clients.js"></script>
+  <script src="web/components/utils/utils.js"></script>
+  <script src="web/components/utils/select2_ang.js"></script>  
+  <!--<!(endif)-->     
+</body>
+</html>

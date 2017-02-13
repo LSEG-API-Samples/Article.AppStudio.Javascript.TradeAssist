@@ -1,0 +1,144 @@
+html, body {
+height: 100%;
+}
+label {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+#query input {
+    width: 100px;
+    margin:5px 1px 5px 3px;
+}
+#query input.search, input.search {
+    width:120px;
+}
+#query input.volume {
+    width:85px;
+    margin-right: 0;
+}
+#query button {
+    margin-right:2px;
+}
+#calculator {
+	width: 400px;
+	border: 1px solid #444;
+    margin-left:3px;
+}
+#scoreboard {
+    overflow: auto;
+    border-bottom:1px solid #444;
+}
+
+#scoreboard input{
+    width: 70px;
+    margin:10px 0;
+    vertical-align: text-bottom;
+}
+#scoreboard label{
+    margin-right: 15px;
+    font-size: 1.6em;
+    vertical-align: 50%;
+}
+#scoreboard .quote{
+    border-top:1px solid #444;
+
+}
+
+#calculator .right_border{
+    border-right:1px solid #444;
+}
+
+.header{
+    background-color: #4f4f57;
+    padding: 2px;
+    border-bottom:1px solid #444;
+    height: 24px;
+}
+#ric_descr {
+    display: inline-block;
+    margin: 3px;
+}
+.buy,.sell {
+    position:relative;
+    width: 50%;
+    text-align: center;
+}
+.buy { 
+    float:left; 
+}
+.sell { 
+    float:right;
+}
+.int {
+    font-size: 2.6em;
+    display: block;
+    margin-bottom:-10px;
+}
+.fractional {
+    font-size: 6.250em;
+    vertical-align: middle;
+    margin-top:-10px;
+}
+.latter {
+    font-size: 1.750em;
+    vertical-align: -20px;
+}
+
+.total { 
+	font-size:1.3em;
+    font-weight: 400;
+    text-align: center;
+    overflow: auto;
+} 
+.total label { 
+ display: block;   
+}
+
+.total span { 
+    font-size: 1.35em;
+}
+.total span.price_is_unavailable {
+    font-size: 1.2em;
+}
+#profit {
+    color:#32AB60;
+}
+
+
+#clients_header {
+  color: #e2e2e2;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 10px 0 5px 5px;
+  display:inline-block;
+  clear:both;
+}
+#clients_header:hover {
+    cursor: pointer;
+}
+
+#clients {
+    width: 900px;
+	clear: both;
+}
+#clients tbody td {
+    text-align: left;   
+    padding: 5px;
+    font-size: 1em;
+	white-space: nowrap;
+}
+
+#clients input.number{
+	width:60px;
+}
+#clientfilter{ margin:5px;}
+.sorting_symbol {
+display: inline-block;
+float: right;
+width: 8px;
+height: 8px;
+margin-left: 4px;
+}
+form[editable-form] > div {margin: 10px 0;}

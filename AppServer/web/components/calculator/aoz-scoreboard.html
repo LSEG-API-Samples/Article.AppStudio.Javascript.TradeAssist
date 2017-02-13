@@ -1,0 +1,38 @@
+<div id="scoreboard" class="amers">
+  <div class="buy {{quote.bidclass}}">
+    <div class="right_border" >
+      <label tabindex="-1">I BUY</label><input id="bidinput" type="number" max="0" step="5" placeholder="Number" required class="large-style" ng-model="quote.clientbid" select-on-click keep_negative ng-enter="changefocusask()">
+      <aoz-quote value="{{quote.mybid()}}" decimalplaces="{{quote.decimalplaces}}" quoteclass="{{quote.bidclass}}"></aoz-quote>
+    </div>
+  </div>
+  <div class="sell {{quote.askclass}}">
+    <label tabindex="-1">I SELL</label><input id="askinput" type="number" min="0" step="5" placeholder="Number" required class="large-style" ng-model="quote.clientask" select-on-click ng-enter="changefocusbid()">
+    <aoz-quote value="{{quote.myask()}}" decimalplaces="{{quote.decimalplaces}}" quoteclass="{{quote.askclass}}"></aoz-quote>
+  </div>
+</div>
+<div class="total">
+  <label>Amount</label>
+  <div class="buy">
+    <div class="right_border">
+    <span ng-show="quote.bid==0" class="price_is_unavailable">Price is not available</span>
+    <span ng-show="quote.bid!=0" ng-bind-html="total(quote.mybid(), quote.volume) | i18nCurrency:quote.currency:'right' | rawHtml"></span>
+    </div>
+  </div>
+  <div class="sell">
+    <span ng-show="quote.ask==0" class="price_is_unavailable">Price is not available</span>
+    <span ng-show="quote.ask!=0" ng-bind-html="total(quote.myask(), quote.volume) | i18nCurrency:quote.currency:'right' | rawHtml"></span>
+  </div>
+</div>
+<div id="profit" class="total">
+  <label>P&L</label>
+  <div class="buy">
+    <div class="right_border">
+      <span ng-show="quote.bid==0" class="price_is_unavailable">Price is not available</span>
+      <span ng-show="quote.bid!=0" ng-bind-html="bid_profit(quote.bid, quote.mybid(), quote.volume) | i18nCurrency:quote.currency:'right' | rawHtml"></span>
+    </div>
+  </div>
+  <div class="sell">
+    <span ng-show="quote.ask==0" class="price_is_unavailable">Price is not available</span>
+    <span ng-show="quote.ask!=0" ng-bind-html="ask_profit(quote.ask, quote.myask(), quote.volume) | i18nCurrency:quote.currency:'right' | rawHtml"></span>
+  </div>
+</div>
