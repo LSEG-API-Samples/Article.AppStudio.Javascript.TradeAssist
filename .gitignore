@@ -1,7 +1,0 @@
-AppServer/node_modules
-AppServer/dist
-AppServer/tmp
-.svn
-
-# WebStorm IDE
-.idea/
