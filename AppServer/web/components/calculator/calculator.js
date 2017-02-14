@@ -141,16 +141,6 @@ angular
       });
     };
 
-    JET.onContextChange(function (contextData) {
-      if (contextData !== undefined) {
-        $scope.quote.ric = contextData[0].RIC;
-        if ($scope.selectedClient !== undefined && $scope.selectedClient.ric == $scope.quote.ric) {
-          $scope.setPoints($scope.selectedClient);
-        }
-        $scope.subscribe();
-      }
-    });
-
     $scope.subscribe();
   }])
 
