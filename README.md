@@ -7,7 +7,7 @@
 + Run `node ./server.js` to have the app served
 + Open http://localhost:9000 in Chrome to check if the app works
 + To see how the app works inside Eikon:
-  + Open Thomson Reuters Eikon
+  + Open Refinitiv Eikon
   + Open menu, select `Developer` and open `App Studio Web Browser`
   + Enter http://localhost:9000 into window's address bar hit Enter (in some cases this does not work; for this occasion first open app in your browser and then in Eikon in the way described above)
   
