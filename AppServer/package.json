@@ -1,7 +1,7 @@
 {
   "name": "trade-assist",
   "version": "0.1.1",
-  "description": "Trade Assist HTML5 Application for Thomson Reuters Eikon 4",
+  "description": "Trade Assist HTML5 Application for Refinitiv Eikon 4",
   "keywords": [
     "Eikon",
     "FX"
